@@ -121,6 +121,7 @@ public class BackupActivity extends ExpandableListActivity {
 			showDialog(DIALOG_LICENSEAGREEMENT);
 		}
 
+		setContentView(R.layout.main);
 		Button showExportDialogBtn = findViewById(R.id.ShowExportDialogBtn);
 		showExportDialogBtn.setOnClickListener(new View.OnClickListener() {
 			@Override

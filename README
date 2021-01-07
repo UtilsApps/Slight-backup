@@ -1,3 +1,5 @@
+Forked from the 2013 repo and striped down as just a call log exporter, to work in Android 4.1+ (API 16+) and Android Studio 4+. Here is the original program readme:
+
 Slight backup android program
 
 Copyright (c) 2011-2014 Stefan Handschuh

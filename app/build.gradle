@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId "de.shandschuh.slightbackup"
         minSdkVersion 16
-        targetSdkVersion 15
+        targetSdkVersion 16
         versionCode 1
         versionName "1.0"
 

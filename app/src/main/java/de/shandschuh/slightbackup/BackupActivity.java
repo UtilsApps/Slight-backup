@@ -85,8 +85,6 @@ public class BackupActivity extends ExpandableListActivity {
 	
 	public static File DIR;
 	
-	public static final boolean CANHAVEROOT = false && checkRoot(); // not yet ready, forgot to branch
-	
 	public static BackupActivity INSTANCE;
 	
 	public static final int API_LEVEL = Integer.parseInt(Build.VERSION.SDK);
@@ -367,29 +365,5 @@ public class BackupActivity extends ExpandableListActivity {
 				}
 			}
 		});
-	}
-	
-	/**
-	 * In order to perform certain backups (such as the wifi settings), we
-	 * need root to access the corresponding configuration files.
-	 *
-	 * @return true if <i>root</i> access can be obtained, <i>false</i>
-	 *         otherwise
-	 */
-	private static boolean checkRoot() {
-		try {
-			Process process = Runtime.getRuntime().exec("/system/bin/ls -l /system/bin/su /system/xbin/su");
-			
-			BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-			
-			String line = reader.readLine();
-			
-			reader.close();
-			process.destroy();
-			
-			return line != null && line.length() > 9 && line.charAt(9) == 'x';
-		} catch (Exception e) {
-			return false;
-		}
 	}
 }

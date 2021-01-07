@@ -83,9 +83,6 @@ public abstract class Exporter {
 		EXPORTERS.add(UserDictionaryExporter.class);
 		EXPORTERS.add(PlaylistExporter.class);
 		EXPORTERS.add(SettingsExporter.class);
-		if (BackupActivity.CANHAVEROOT) {
-			EXPORTERS.add(WifiSettingsExporter.class);
-		}
 		if (BackupActivity.API_LEVEL > 4) {
 			EXPORTERS.add(ContactsExporter.class);
 		}

@@ -46,7 +46,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
-import de.shandschuh.slightbackup.parser.SimpleParser;
 
 public class BackupFilesListAdapter extends BaseExpandableListAdapter {
 	private static final String BRACKED = " (";
@@ -181,7 +180,12 @@ public class BackupFilesListAdapter extends BaseExpandableListAdapter {
 		}
 		
 		view.setTag(count);
-		((TextView) view.findViewById(android.R.id.text1)).setText(new StringBuilder(timeFormat.format(new Date(date))).append(DASH).append(context.getString(SimpleParser.getTranslatedParserName(filename))));
+		((TextView) view.findViewById(android.R.id.text1)).setText(
+				new StringBuilder(
+						timeFormat.format(new Date(date)))
+						.append(DASH)
+						//.append(context.getString(SimpleParser.getTranslatedParserName(filename)))
+		);
 		return view;
 	}
 	
@@ -246,17 +250,17 @@ public class BackupFilesListAdapter extends BaseExpandableListAdapter {
 			
 			if (cycleCount > 0) {
 				String filename = file.toString();
-				
+				/*
 				int backuptype = SimpleParser.getTranslatedParserName(filename);
 				
-				/** first, search the vector */
+				// first, search the vector
 				for (int n = vector.size()-2; n > -1; n--) {
 					if (backuptype == SimpleParser.getTranslatedParserName(vector.get(n).toString()) && --cycleCount < 1) {
 						vector.remove(n).delete();
 					}
 				}
 				
-				/** second, search the other data */
+				// second, search the other data
 				for (int n = dates.size()-2; n > -1; n--) {
 					vector = data.get(dates.get(n));
 					
@@ -270,6 +274,7 @@ public class BackupFilesListAdapter extends BaseExpandableListAdapter {
 						dates.remove(n);
 					}
 				}
+				*/
 			}
 			notifyDataSetChanged();
 		}

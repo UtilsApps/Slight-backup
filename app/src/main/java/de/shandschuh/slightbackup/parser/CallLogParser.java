@@ -31,13 +31,13 @@ import de.shandschuh.slightbackup.BackupActivity;
 import de.shandschuh.slightbackup.R;
 import de.shandschuh.slightbackup.Strings;
 
-public class CallLogParser extends SimpleParser {
+public class CallLogParser /*extends SimpleParser*/ {
 	public static final String NAME = Strings.CALLLOGS;
 	
 	public static final int NAMEID = R.string.calllogs;
 	
-	public CallLogParser(Context context, ImportTask importTask) {
-		super(context, Strings.TAG_CALL, new String[] {CallLog.Calls.CACHED_NAME,
+	public CallLogParser(Context context/*, ImportTask importTask*/) {
+		/*super(context, Strings.TAG_CALL, new String[] {CallLog.Calls.CACHED_NAME,
 				CallLog.Calls.CACHED_NUMBER_LABEL,
 				CallLog.Calls.CACHED_NUMBER_TYPE,
 				CallLog.Calls.DATE,
@@ -46,6 +46,7 @@ public class CallLogParser extends SimpleParser {
 				CallLog.Calls.NUMBER,
 				CallLog.Calls.TYPE
 		}, CallLog.Calls.CONTENT_URI, importTask, null, BackupActivity.API_LEVEL > 13 ? new String[] {CallLog.Calls.TYPE, Strings.FOUR} : null);
+		*/
 	}
 
 }

@@ -144,33 +144,7 @@ public class BackupActivity extends ExpandableListActivity {
 				break;
 			}
 			case R.id.menu_export: {
-				if (selectExportsDialog == null) {
-					AlertDialog.Builder builder = new AlertDialog.Builder(this);
-					
-					builder.setIcon(android.R.drawable.ic_dialog_info);
-					builder.setTitle(R.string.dialog_export);
-					
-					exporterInfos = Exporter.getExporterInfos(this);
-					
-					builder.setNegativeButton(android.R.string.cancel, new OnClickListener() {
-						public void onClick(DialogInterface dialog, int which) {
-							dialog.cancel();
-						}
-					});
-					
-					builder.setItems(exporterInfos.names, new OnClickListener() {
-						public void onClick(DialogInterface dialog, int which) {
-							dialog.dismiss();
-							if (exportDialog == null) {
-								exportDialog = new ProgressDialog(BackupActivity.this);
-							}
-							checkProgressDialog(exportDialog);
-							checkExportTaskForIncompleteData(new ExportTask(exportDialog, listAdapter, exporterInfos.ids[which]));
-						}
-					});
-					selectExportsDialog = builder.create();
-				}
-				selectExportsDialog.show();
+				createAndShowExportDialog();
 				break;
 			}
 			case R.id.menu_settings: {
@@ -180,7 +154,37 @@ public class BackupActivity extends ExpandableListActivity {
 		}
 		return true;
 	}
-	
+
+	private void createAndShowExportDialog() {
+		if (selectExportsDialog == null) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+			builder.setIcon(android.R.drawable.ic_dialog_info);
+			builder.setTitle(R.string.dialog_export);
+
+			exporterInfos = Exporter.getExporterInfos(this);
+
+			builder.setNegativeButton(android.R.string.cancel, new OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.cancel();
+				}
+			});
+
+			builder.setItems(exporterInfos.names, new OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+					if (exportDialog == null) {
+						exportDialog = new ProgressDialog(BackupActivity.this);
+					}
+					checkProgressDialog(exportDialog);
+					checkExportTaskForIncompleteData(new ExportTask(exportDialog, listAdapter, exporterInfos.ids[which]));
+				}
+			});
+			selectExportsDialog = builder.create();
+		}
+		selectExportsDialog.show();
+	}
+
 	/**
 	 * Checks if the exporter that is attached to the given ExportTask may
 	 * produce incomplete data and shows a warning if this is the case and

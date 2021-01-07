@@ -30,6 +30,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Writer;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Vector;
 
 import android.content.Context;
@@ -148,6 +151,16 @@ public abstract class SimpleExporter extends Exporter {
 						writer.write(EQUALS);
 						writer.write(TextUtils.htmlEncode(string));
 						writer.write('"');
+
+						final String DATE_FIELD_NAME = "date";
+						if(DATE_FIELD_NAME.equals(fields[n])) {
+							writer.write(' ');
+							writer.write("startedAt");
+							writer.write(EQUALS);
+							String timeStamp = parseTimeStamp(string);
+							writer.write(timeStamp);
+							writer.write('"');
+						}
 					}
 				} catch (Exception e) {
 					// if there is blob data
@@ -174,7 +187,17 @@ public abstract class SimpleExporter extends Exporter {
 			return -1;
 		}
 	}
-	
+
+	private String parseTimeStamp(String dateInMillisString) {
+		final String datePattern = "yyyy MMM dd (EEE) hh:mm aaa";
+		//Locale.ITALY
+		Long dateInMillis = Long.parseLong(dateInMillisString);
+
+		SimpleDateFormat formatter = new SimpleDateFormat(datePattern);
+		String dateString = formatter.format(new Date(dateInMillis));
+		return dateString;
+	}
+
 	private String[] determineFields(String[] columnNames, String[] fields, String[] optionalFields) {
 		Vector<String> result = new Vector<String>();
 		

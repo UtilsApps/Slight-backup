@@ -53,6 +53,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnCreateContextMenuListener;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -119,6 +120,14 @@ public class BackupActivity extends ExpandableListActivity {
 		} else {
 			showDialog(DIALOG_LICENSEAGREEMENT);
 		}
+
+		Button showExportDialogBtn = findViewById(R.id.ShowExportDialogBtn);
+		showExportDialogBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				createAndShowExportDialog();
+			}
+		});
 	}
 	
 	@Override
